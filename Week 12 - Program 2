@@ -1,0 +1,61 @@
+# Logan H's Joe's Automotive Service Calculator
+
+# 1st, IMPORT tkinter to build the GUI
+import tkinter as tk
+
+
+# 2nd, DEFINE function to calculate total service charges
+def calculate_total():
+    total = 0
+    if var_oil.get():
+        total += 30
+    if var_lube.get():
+        total += 20
+    if var_radiator.get():
+        total += 40
+    if var_transmission.get():
+        total += 100
+    if var_inspection.get():
+        total += 35
+    if var_muffler.get():
+        total += 200
+    if var_tires.get():
+        total += 20
+
+    label_total.config(text=f"Total Charges: ${total:.2f}")
+
+
+# 3rd, SET UP main window
+window = tk.Tk()
+window.title("Joe's Automotive Service")
+
+
+# 4th, SET UP service checkboxes using IntVars
+var_oil = tk.IntVar()
+var_lube = tk.IntVar()
+var_radiator = tk.IntVar()
+var_transmission = tk.IntVar()
+var_inspection = tk.IntVar()
+var_muffler = tk.IntVar()
+var_tires = tk.IntVar()
+
+# 5th, CREATE and pack each checkbox with its label
+tk.Checkbutton(window, text="Oil Change - $30.00", variable=var_oil).pack(anchor="w")
+tk.Checkbutton(window, text="Lube Job - $20.00", variable=var_lube).pack(anchor="w")
+tk.Checkbutton(window, text="Radiator Flush - $40.00", variable=var_radiator).pack(anchor="w")
+tk.Checkbutton(window, text="Transmission Fluid - $100.00", variable=var_transmission).pack(anchor="w")
+tk.Checkbutton(window, text="Inspection - $35.00", variable=var_inspection).pack(anchor="w")
+tk.Checkbutton(window, text="Muffler Replacement - $200.00", variable=var_muffler).pack(anchor="w")
+tk.Checkbutton(window, text="Tire Rotation - $20.00", variable=var_tires).pack(anchor="w")
+
+
+# 6th, CREATE calculate button
+tk.Button(window, text="Calculate Total", command=calculate_total).pack(pady=10)
+
+# 7th, DISPLAY result label
+label_total = tk.Label(window, text="Total Charges: $0.00")
+label_total.pack()
+
+
+# 8th, FINALLY, run the mainloop
+window.mainloop()
