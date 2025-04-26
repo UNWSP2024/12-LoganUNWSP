@@ -1,0 +1,56 @@
+# Logan H's Long-Distance Call Cost Calculator
+
+# 1st, IMPORT tkinter for GUI and messagebox for the result popup
+import tkinter as tk
+from tkinter import messagebox
+
+
+# 2nd, DEFINE function to calculate the call charge
+def calculate_charge():
+    try:
+        minutes = float(entry_minutes.get())
+        if minutes < 0:
+            raise ValueError("Minutes must be a positive number.")
+
+        # Get selected rate
+        if rate.get() == 1:
+            cost = minutes * 0.02  # Daytime
+        elif rate.get() == 2:
+            cost = minutes * 0.12  # Evening
+        else:
+            cost = minutes * 0.05  # Off-Peak
+
+        messagebox.showinfo("Call Charge", f"The total charge is: ${cost:.2f}")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter a valid number of minutes.")
+
+
+# 3rd, SET UP main window
+window = tk.Tk()
+window.title("Long-Distance Call Calculator")
+
+
+# 4th, SET UP a frame and label for selecting rate category
+frame_rates = tk.LabelFrame(window, text="Select Rate Category")
+frame_rates.pack(padx=10, pady=10, fill="both")
+
+rate = tk.IntVar()
+rate.set(1)  # Default to Daytime
+
+tk.Radiobutton(frame_rates, text="Daytime (6 AM - 5:59 PM) - $0.02/min", variable=rate, value=1).pack(anchor="w")
+tk.Radiobutton(frame_rates, text="Evening (6 PM - 11:59 PM) - $0.12/min", variable=rate, value=2).pack(anchor="w")
+tk.Radiobutton(frame_rates, text="Off-Peak (Midnight - 5:59 AM) - $0.05/min", variable=rate, value=3).pack(anchor="w")
+
+
+# 5th, SET UP entry for minutes input
+tk.Label(window, text="Enter number of minutes:").pack(pady=(10, 0))
+entry_minutes = tk.Entry(window)
+entry_minutes.pack()
+
+
+# 6th, SET UP calculate button
+tk.Button(window, text="Calculate Charge", command=calculate_charge).pack(pady=10)
+
+
+# 7th, FINALLY, run the GUI loop
+window.mainloop()

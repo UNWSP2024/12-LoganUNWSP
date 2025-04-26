@@ -1,0 +1,49 @@
+# Logan H's MPG Calculator
+
+# 1st, IMPORT tkinter for the GUI
+import tkinter as tk
+
+
+# 2nd, DEFINE function to calculate MPG
+def calculate_mpg():
+    try:
+        gallons = float(entry_gallons.get())
+        miles = float(entry_miles.get())
+
+    # 3rd, SET UP formula for MPG, then update the label
+        mpg = miles / gallons
+        label_result.config(text=f"MPG: {mpg:.2f}")
+
+    except ValueError:
+        label_result.config(text="Please enter valid numbers!")
+
+
+# 4th, SET UP the main window and widgets
+window = tk.Tk()
+window.title("MPG Calculator")
+
+# Entry for gallons
+entry_gallons = tk.Entry(window)
+entry_gallons.pack(pady=10)
+
+label_gallons = tk.Label(window, text="Enter the number of gallons:")
+label_gallons.pack(pady=5)
+
+# Entry for miles
+entry_miles = tk.Entry(window)
+entry_miles.pack(pady=10)
+
+label_miles = tk.Label(window, text="Enter the number of miles:")
+label_miles.pack(pady=5)
+
+# Button to calculate MPG
+button = tk.Button(window, text="Calculate MPG", command=calculate_mpg)
+button.pack(pady=10)
+
+# Label to display the result
+label_result = tk.Label(window, text="MPG will be shown here")
+label_result.pack(pady=10)
+
+
+# 5th, FINALLY, run the main loop
+window.mainloop()
